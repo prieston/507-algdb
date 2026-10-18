@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="el">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f3ed">
+  <meta name="description" content="Ένας απλός οδηγός για τον κλασικό ελληνικό φραπέ, από τον αφρό μέχρι την τελευταία γουλιά.">
+  <title>Ο φραπέ, όπως πρέπει</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f5f3ed;
+      --ink: #182d2b;
+      --muted: #687774;
+      --green: #175c4d;
+      --lime: #d3e969;
+      --line: #d8ddd3;
+      --white: #fffefa;
+      font-family: "DM Sans", sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+      font-synthesis: none;
+      text-rendering: optimizeLegibility;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; min-width: 320px; }
+    button { font: inherit; }
+
+    .page-shell { max-width: 1280px; margin: 0 auto; padding: 0 7.1%; }
+    .topbar {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--line);
+    }
+    .wordmark { display: flex; align-items: center; gap: 10px; font-weight: 700; }
+    .wordmark-mark {
+      width: 30px; height: 30px; display: grid; place-items: center;
+      color: var(--ink); background: var(--lime); border-radius: 50%; font-size: 14px;
+    }
+    .top-note { color: var(--muted); font-size: 12px; letter-spacing: 0; }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(350px, .95fr);
+      gap: clamp(36px, 7vw, 94px);
+      align-items: center;
+      padding: clamp(48px, 8vw, 100px) 0 82px;
+    }
+    .photo-wrap { position: relative; min-height: 510px; height: min(58vw, 620px); max-height: 660px; }
+    .hero-photo {
+      display: block; width: 100%; height: 100%; object-fit: cover;
+      border-radius: 3px; background: #c4d7ca;
+    }
+    .photo-caption {
+      position: absolute; left: 16px; bottom: 16px; padding: 8px 12px;
+      color: var(--ink); background: var(--white); font-size: 11px; font-weight: 600;
+    }
+    .recipe-copy { padding: 8px 0; }
+    .eyebrow { display: flex; align-items: center; gap: 10px; color: var(--green); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; }
+    .eyebrow::before { content: ""; display: block; width: 24px; height: 2px; background: var(--green); }
+    h1, h2, p { margin-top: 0; }
+    h1 {
+      max-width: 540px; margin: 20px 0 18px;
+      font: 600 clamp(48px, 6.1vw, 78px)/1.02 "Playfair Display", Georgia, serif;
+      letter-spacing: 0;
+    }
+    h1 span { color: var(--green); font-style: italic; }
+    .intro { max-width: 420px; color: var(--muted); font-size: 15px; line-height: 1.75; }
+    .recipe-meta { display: flex; gap: 28px; margin: 30px 0; padding: 19px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .meta-item { display: grid; gap: 4px; }
+    .meta-label { color: var(--muted); font-size: 10px; text-transform: uppercase; letter-spacing: 1px; }
+    .meta-value { font-size: 14px; font-weight: 600; }
+    .primary-link {
+      display: inline-flex; align-items: center; gap: 20px; min-height: 50px; padding: 0 18px;
+      color: var(--white); background: var(--green); text-decoration: none; font-size: 13px; font-weight: 600;
+      transition: background .2s, transform .2s;
+    }
+    .primary-link:hover { background: #104637; transform: translateY(-2px); }
+    .primary-link span { font-size: 18px; line-height: 1; }
+
+    .recipe-section { padding: 52px 0 92px; border-top: 1px solid var(--line); }
+    .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 34px; }
+    .section-heading h2 { margin: 10px 0 0; font: 600 clamp(32px, 4vw, 46px)/1.1 "Playfair Display", Georgia, serif; }
+    .serving-control { display: flex; align-items: center; gap: 12px; padding-bottom: 3px; }
+    .serving-control span { color: var(--muted); font-size: 12px; }
+    .stepper { display: flex; align-items: center; gap: 11px; }
+    .stepper button {
+      width: 34px; height: 34px; display: grid; place-items: center; padding: 0;
+      color: var(--ink); background: transparent; border: 1px solid var(--line); cursor: pointer;
+    }
+    .stepper button:hover { background: var(--lime); border-color: var(--lime); }
+    .stepper output { min-width: 14px; text-align: center; font-size: 13px; font-weight: 700; }
+    .recipe-grid { display: grid; grid-template-columns: .82fr 1.18fr; gap: clamp(38px, 8vw, 112px); }
+    .ingredients { padding-top: 5px; }
+    .ingredients h3, .method h3 { margin: 0 0 18px; font-size: 13px; }
+    .ingredient-list { padding: 0; margin: 0; list-style: none; }
+    .ingredient-list li { display: flex; justify-content: space-between; gap: 18px; padding: 13px 0; border-top: 1px solid var(--line); font-size: 13px; }
+    .ingredient-list .quantity { color: var(--muted); text-align: right; white-space: nowrap; }
+    .method-list { display: grid; grid-template-columns: 1fr 1fr; gap: 26px 24px; }
+    .method-step { display: grid; grid-template-columns: 34px 1fr; gap: 12px; }
+    .step-number { width: 30px; height: 30px; display: grid; place-items: center; color: var(--green); background: #e5ebd6; border-radius: 50%; font-size: 11px; font-weight: 700; }
+    .method-step p { margin: 3px 0 0; color: var(--muted); font-size: 13px; line-height: 1.7; }
+    .method-step strong { color: var(--ink); font-weight: 600; }
+    footer { display: flex; justify-content: space-between; gap: 20px; padding: 19px 0 28px; color: var(--muted); border-top: 1px solid var(--line); font-size: 11px; }
+
+    @media (max-width: 760px) {
+      .page-shell { padding: 0 6%; }
+      .topbar { min-height: 66px; }
+      .top-note { max-width: 130px; text-align: right; line-height: 1.4; }
+      .hero { grid-template-columns: 1fr; gap: 35px; padding: 34px 0 58px; }
+      .photo-wrap { min-height: 0; height: auto; aspect-ratio: 1 / 1.05; }
+      .hero-photo { object-position: center 54%; }
+      h1 { max-width: 480px; font-size: clamp(48px, 13vw, 68px); }
+      .recipe-copy { padding: 0; }
+      .recipe-meta { margin: 24px 0; }
+      .recipe-section { padding: 42px 0 62px; }
+      .section-heading { align-items: start; flex-direction: column; margin-bottom: 28px; }
+      .recipe-grid { grid-template-columns: 1fr; gap: 38px; }
+      .method-list { grid-template-columns: 1fr; gap: 20px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="page-shell topbar">
+    <a class="wordmark" href="#top" aria-label="Αρχή σελίδας">
+      <span class="wordmark-mark" aria-hidden="true">φ</span>
+      <span>Μικρές απολαύσεις</span>
+    </a>
+    <span class="top-note">Ένα ελληνικό κλασικό, στο σπίτι</span>
+  </header>
+
+  <main id="top" class="page-shell">
+    <section class="hero" aria-labelledby="recipe-title">
+      <div class="photo-wrap">
+        <img class="hero-photo" src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=1200&q=85" alt="Παγωμένος καφές με αφρό και παγάκια σε ψηλό ποτήρι" fetchpriority="high">
+        <span class="photo-caption">Καφές, πάγος, λίγος χρόνος.</span>
+      </div>
+      <div class="recipe-copy">
+        <div class="eyebrow">Η συνταγή της ημέρας</div>
+        <h1 id="recipe-title">Ο φραπέ,<br><span>όπως πρέπει.</span></h1>
+        <p class="intro">Πλούσιος αφρός, δυνατός στιγμιαίος καφές και παγάκια που κρατούν τη δροσιά μέχρι την τελευταία γουλιά. Το καλοκαίρι σε ένα ποτήρι.</p>
+        <div class="recipe-meta" aria-label="Χαρακτηριστικά συνταγής">
+          <div class="meta-item"><span class="meta-label">Προετοιμασία</span><span class="meta-value">5 λεπτά</span></div>
+          <div class="meta-item"><span class="meta-label">Δυσκολία</span><span class="meta-value">Πανεύκολη</span></div>
+          <div class="meta-item"><span class="meta-label">Μερίδες</span><span class="meta-value"><span id="meta-servings">1</span> ποτήρι</span></div>
+        </div>
+        <a class="primary-link" href="#syntagi">Πάμε να τον φτιάξουμε <span aria-hidden="true">↓</span></a>
+      </div>
+    </section>
+
+    <section id="syntagi" class="recipe-section" aria-labelledby="recipe-heading">
+      <div class="section-heading">
+        <div>
+          <div class="eyebrow">Απλά και ωραία</div>
+          <h2 id="recipe-heading">Η συνταγή</h2>
+        </div>
+        <div class="serving-control" aria-label="Αλλαγή αριθμού μερίδων">
+          <span>Μερίδες</span>
+          <div class="stepper">
+            <button id="decrease" type="button" aria-label="Μείωση μερίδων">−</button>
+            <output id="servings" aria-live="polite">1</output>
+            <button id="increase" type="button" aria-label="Αύξηση μερίδων">+</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="recipe-grid">
+        <div class="ingredients">
+          <h3>Υλικά</h3>
+          <ul class="ingredient-list">
+            <li><span>Στιγμιαίος καφές</span><span class="quantity"><span data-amount="2">2</span> κ.γ.</span></li>
+            <li><span>Κρύο νερό</span><span class="quantity"><span data-amount="30">30</span> ml</span></li>
+            <li><span>Ζάχαρη <span style="color: var(--muted)">(προαιρετικά)</span></span><span class="quantity"><span data-amount="1">1</span> κ.γ.</span></li>
+            <li><span>Παγάκια</span><span class="quantity"><span data-amount="4">4</span>–<span data-amount="5">5</span></span></li>
+            <li><span>Κρύο νερό για το ποτήρι</span><span class="quantity">όσο χρειαστεί</span></li>
+          </ul>
+        </div>
+
+        <div class="method">
+          <h3>Εκτέλεση</h3>
+          <div class="method-list">
+            <div class="method-step"><span class="step-number">01</span><p><strong>Ξεκίνα με τον αφρό.</strong> Βάλε τον καφέ, τη ζάχαρη και τα 30 ml νερού σε σέικερ ή ψηλό δοχείο.</p></div>
+            <div class="method-step"><span class="step-number">02</span><p><strong>Χτύπα δυνατά.</strong> Για 20–30 δευτερόλεπτα, μέχρι να γίνει πηχτός και ανοιχτόχρωμος ο αφρός.</p></div>
+            <div class="method-step"><span class="step-number">03</span><p><strong>Σέρβιρε με πάγο.</strong> Άδειασε τον αφρό σε ψηλό ποτήρι και πρόσθεσε τα παγάκια.</p></div>
+            <div class="method-step"><span class="step-number">04</span><p><strong>Συμπλήρωσε και απόλαυσε.</strong> Ρίξε κρύο νερό, ανακάτεψε απαλά και βάλε καλαμάκι.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="page-shell"><span>Με αγάπη και αρκετό αφρό.</span><span>Καλή απόλαυση!</span></footer>
+
+  <script>
+    const servingsOutput = document.querySelector("#servings");
+    const metaServings = document.querySelector("#meta-servings");
+    const amountValues = [...document.querySelectorAll("[data-amount]")].map((element) => Number(element.dataset.amount));
+    let servings = 1;
+
+    function updateServings() {
+      servingsOutput.value = servings;
+      servingsOutput.textContent = servings;
+      metaServings.textContent = servings;
+      document.querySelectorAll("[data-amount]").forEach((element, index) => {
+        element.textContent = amountValues[index] * servings;
+      });
+    }
+
+    document.querySelector("#decrease").addEventListener("click", () => {
+      servings = Math.max(1, servings - 1);
+      updateServings();
+    });
+    document.querySelector("#increase").addEventListener("click", () => {
+      servings = Math.min(12, servings + 1);
+      updateServings();
+    });
+  </script>
+</body>
+</html>
